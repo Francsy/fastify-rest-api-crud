@@ -1,0 +1,29 @@
+{
+  "name": "fastify-rest-api-crud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Francsy/fastify-rest-api-crud.git"
+  },
+  "author": "Francsy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Francsy/fastify-rest-api-crud/issues"
+  },
+  "homepage": "https://github.com/Francsy/fastify-rest-api-crud#readme",
+  "dependencies": {
+    "fastify": "^4.26.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.16",
+    "@typescript-eslint/eslint-plugin": "^6.20.0",
+    "@typescript-eslint/parser": "^6.20.0",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3"
+  }
+}
