@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Francsy/fastify-rest-api-crud#readme",
   "dependencies": {
+    "@fastify/cors": "^9.0.1",
     "fastify": "^4.26.0"
   },
   "devDependencies": {

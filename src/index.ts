@@ -1,7 +1,12 @@
 import fastify from 'fastify';
 import { userRoutes } from './routes/userRoutes';
+import cors from '@fastify/cors';
+
 
 const server = fastify({ logger: true });
+
+server.register(cors, {});
+
 
 // GET                  C-REATE
 // POST                 R-EAD
