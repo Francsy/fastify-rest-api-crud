@@ -8,10 +8,6 @@ const server = fastify({ logger: true });
 
 server.register(cors, {});
 
-// GET                  C-REATE
-// POST                 R-EAD
-// PUT                  U-UPDATE
-// DELETE               D-ELETE
 const orm = initDB();
 
 server.get('/', async () => {

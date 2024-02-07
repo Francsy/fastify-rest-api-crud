@@ -2,7 +2,7 @@
 
 import { MikroORM } from '@mikro-orm/postgresql';
 import { User } from '../models/User';
-import '@mikro-orm/migrations';
+import { Migrator } from '@mikro-orm/migrations';
 
 const initDB = async () => {
     try {
@@ -14,15 +14,21 @@ const initDB = async () => {
             host: process.env.DB_HOST ?? 'localhost',
             port: process.env.DB_PORT ? Number(process.env.PORT) : 5432,
             debug: true,
+            extensions: [Migrator]
         });
         console.log(orm.em);
         // Create DB if not exists:
         await orm.getSchemaGenerator().ensureDatabase();
 
-        // Syncronize tables with entities:
-        // const migrator = orm.getMigrator();
-        // await migrator.createMigration(); // puedes pasar opciones adicionales si es necesario
+        // Create tables:
+        const migrator = orm.getMigrator();
+        await migrator.createMigration(); // Just for development phase: to update the changes in the schemas in the db
+        const pendingMigrations = await migrator.getPendingMigrations();
 
+        if (pendingMigrations.length > 0) {
+            console.log('Migraciones pendientes:', pendingMigrations);
+            await migrator.up();
+        }
 
         return orm;
     } catch (error) {
