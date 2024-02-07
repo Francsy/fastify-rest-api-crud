@@ -2,17 +2,17 @@ import 'dotenv/config'; // For development. In production, we can change the sta
 import fastify from 'fastify';
 import { userRoutes } from './routes/userRoutes';
 import cors from '@fastify/cors';
-
+import initDB from './utils/db';
 
 const server = fastify({ logger: true });
 
 server.register(cors, {});
 
-
 // GET                  C-REATE
 // POST                 R-EAD
 // PUT                  U-UPDATE
 // DELETE               D-ELETE
+const orm = initDB();
 
 server.get('/', async () => {
     return { message: 'Hello World' };

@@ -21,6 +21,9 @@
   "homepage": "https://github.com/Francsy/fastify-rest-api-crud#readme",
   "dependencies": {
     "@fastify/cors": "^9.0.1",
+    "@mikro-orm/core": "^6.1.0",
+    "@mikro-orm/migrations": "^6.1.0",
+    "@mikro-orm/postgresql": "^6.1.0",
     "dotenv": "^16.4.1",
     "fastify": "^4.26.0"
   },
