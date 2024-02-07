@@ -1,7 +1,13 @@
+import 'dotenv/config'; // For development. In production, we can change the start script in Node new versions to add the .env: "node --env-file .env src/index.js"
 import fastify from 'fastify';
 import { userRoutes } from './routes/userRoutes';
+import cors from '@fastify/cors';
+
 
 const server = fastify({ logger: true });
+
+server.register(cors, {});
+
 
 // GET                  C-REATE
 // POST                 R-EAD

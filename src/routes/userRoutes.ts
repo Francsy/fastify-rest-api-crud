@@ -11,8 +11,6 @@ interface userRegistrationBody {
     confirmPassword: string
 }
 
-
-
 export const userRoutes: RouteOptions[] = [
     {
         method: 'GET',
@@ -26,8 +24,11 @@ export const userRoutes: RouteOptions[] = [
         url: '/users',
         handler: async (req, res) => {
             const { email, password, confirmPassword } = req.body as userRegistrationBody;
-            if (email && (password === confirmPassword)) res.status(200).send({ status: `New user created with email ${email}` });
-            else res.status(401).send({ status: 'Invalid credentials' });
+            if (email && (password === confirmPassword)) {
+                res.status(200).send({ status: `New user created with email ${email} and id ${crypto.randomUUID()}` });
+            } else {
+                res.status(401).send({ status: 'Invalid credentials' });
+            }
         }
     },
     {
