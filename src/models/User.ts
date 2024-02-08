@@ -26,10 +26,13 @@ export class User {
     role!: Role;
 
     @Property()
-    profile_img_url?: string;
+    profileImgUrl?: string;
 
     @Property()
-    session_token?: string;
+    sessionToken?: string;
+
+    @Property()
+    createdAt = new Date();
 
     constructor() {
         this.role = 'user'; // Default value
