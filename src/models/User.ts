@@ -7,7 +7,7 @@ export class User {
     @PrimaryKey({ type: 'uuid' })
     id: UUID = crypto.randomUUID();
 
-    @Property({ length: 50, unique: true })
+    @Property({ length: 50, unique: true, index: true })
     username!: string;
 
     @Property({ length: 100 })
@@ -33,6 +33,7 @@ export class User {
 
     @Property()
     createdAt = new Date();
+
 
     constructor() {
         this.role = 'user'; // Default value
