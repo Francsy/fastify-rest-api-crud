@@ -26,7 +26,7 @@ const initDB = async () => {
         const pendingMigrations = await migrator.getPendingMigrations();
 
         if (pendingMigrations.length > 0) {
-            console.log('Migraciones pendientes:', pendingMigrations);
+            console.log('Pending migrations:', pendingMigrations);
             await migrator.up();
         }
 

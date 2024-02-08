@@ -1,7 +1,5 @@
 import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
-
-type UUID = `${string}-${string}-${string}-${string}-${string}`;
-type Role = 'user' | 'admin';
+import { UUID, Role } from '../types';
 
 @Entity()
 export class User {
