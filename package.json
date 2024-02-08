@@ -2,11 +2,11 @@
   "name": "fastify-rest-api-crud",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "server.ts",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "start": "node --env-file .env src/index.js",
-    "dev": "nodemon --exec ts-node src/index.ts",
+    "start": "node --env-file .env src/server.js",
+    "dev": "nodemon --exec ts-node src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

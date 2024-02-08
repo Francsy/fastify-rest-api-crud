@@ -22,7 +22,7 @@ const initDB = async () => {
 
         // Create tables:
         const migrator = orm.getMigrator();
-        await migrator.createMigration(); // Just for development phase: to update the changes in the schemas in the db
+        await migrator.createMigration(); // Just for development phase: to update db with changes in the schemas
         const pendingMigrations = await migrator.getPendingMigrations();
 
         if (pendingMigrations.length > 0) {
