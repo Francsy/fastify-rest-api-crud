@@ -4,7 +4,7 @@ import { bootstrap } from './app/app';
 
 const start = async () => {
     try {
-        const { url } = await bootstrap();
+        const { url } = await bootstrap(); // bootstrap can take port number as a parameter
         console.log(`Server is running on ${url}`);
 
     } catch (error) {

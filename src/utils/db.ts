@@ -1,10 +1,20 @@
 // Config and DB connection
 
-import { MikroORM } from '@mikro-orm/postgresql';
+import { EntityManager, EntityRepository, MikroORM } from '@mikro-orm/postgresql';
 import { User } from '../models/User';
 import { Migrator } from '@mikro-orm/migrations';
 
-const initDB = async () => {
+export interface Services {
+    orm: MikroORM;
+    em: EntityManager;
+    user: EntityRepository<User>;
+}
+
+let cache: Services;
+
+export const initDB = async () => {
+    if (cache) return cache;
+
     try {
         const orm = await MikroORM.init({
             entities: [User],
@@ -30,11 +40,15 @@ const initDB = async () => {
             await migrator.up();
         }
 
-        return orm;
+        return (cache = {
+            orm,
+            em: orm.em,
+            user: orm.em.getRepository(User)
+        });
+
     } catch (error) {
         console.error('Error initializing MikroORM:', error);
         throw error;
     }
 };
 
-export default initDB;

@@ -1,13 +1,18 @@
-// import { RequestContext } from '@mikro-orm/postgresql';
+import { RequestContext } from '@mikro-orm/postgresql';
 import fastify from 'fastify';
-import initDB from '../utils/db';
+import { initDB, Services } from '../utils/db';
 import cors from '@fastify/cors';
 import { userRoutes } from '../routes/userRoutes';
 
 export const bootstrap = async (port = 3500) => {
-    const db = initDB();
+    const { orm, em }: Services = await initDB();
     const server = fastify({ logger: true });
+
     server.register(cors, {});
+
+    server.addHook('onRequest', (request, reply, done) => RequestContext.create(em, done));
+
+    server.addHook('onClose', async () => await orm.close());
 
     server.get('/', async () => {
         return { message: 'Hello World' };
