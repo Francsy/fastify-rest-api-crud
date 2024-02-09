@@ -1,8 +1,8 @@
 // Config and DB connection
 
 import { EntityManager, EntityRepository, MikroORM } from '@mikro-orm/postgresql';
-import { User } from '../models/User';
-import { Creator } from '../models/Creator';
+import { User } from '../entities/User';
+import { Creator } from '../entities/Creator';
 import { Migrator } from '@mikro-orm/migrations';
 
 export interface Services {
