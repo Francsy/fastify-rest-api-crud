@@ -37,7 +37,7 @@ export class User {
     @Property()
     sessionToken?: string;
 
-    @ManyToMany(() => Podcast, podcast => podcast.followers)
+    @ManyToMany(() => Podcast, podcast => podcast.followers, { mappedBy: 'followers' })
     podcasts = new Collection<Podcast>(this);
 
     @Property({ type: 'date', default: 'NOW()' })
@@ -45,7 +45,6 @@ export class User {
 
     @Property({ onUpdate: () => new Date() })
     updatedAt = new Date();
-
 
 
 
@@ -58,6 +57,7 @@ export class User {
         this.profileImgUrl = profileImgUrl ?? 'https://example.com/images/avatar.jpg'; // This will change to a public static files url served by the API itself
     }
 
+    // Note: @BeforeCreate and @BeforeUpdate life cycle hooks for hashing the password will be a nice future implementation:
 
     private hashPassword(password: string) {
         const secretKey = process.env.P_KEY || 'your_secret_key';
@@ -91,3 +91,5 @@ export class User {
         }
     }
 }
+
+

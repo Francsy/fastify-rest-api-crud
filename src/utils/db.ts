@@ -4,12 +4,16 @@ import { EntityManager, EntityRepository, MikroORM } from '@mikro-orm/postgresql
 import { User } from '../entities/User';
 import { Creator } from '../entities/Creator';
 import { Migrator } from '@mikro-orm/migrations';
+import { Podcast } from '../entities/Podcast';
+import { Episode } from '../entities/Episode';
 
 export interface Services {
     orm: MikroORM;
     em: EntityManager;
     user: EntityRepository<User>;
     creator: EntityRepository<Creator>;
+    podcast: EntityRepository<Podcast>;
+    episode: EntityRepository<Episode>;
 }
 
 let cache: Services;
@@ -19,7 +23,7 @@ export const initDB = async () => {
 
     try {
         const orm = await MikroORM.init({
-            entities: [User, Creator],
+            entities: [User, Creator, Podcast, Episode],
             dbName: 'db_podcasts',
             user: process.env.DB_USER,
             password: process.env.DB_PASSWORD,
@@ -46,7 +50,9 @@ export const initDB = async () => {
             orm,
             em: orm.em,
             user: orm.em.getRepository(User),
-            creator: orm.em.getRepository(Creator)
+            creator: orm.em.getRepository(Creator),
+            podcast: orm.em.getRepository(Podcast),
+            episode: orm.em.getRepository(Episode)
         });
 
     } catch (error) {

@@ -24,7 +24,7 @@ export class Podcast extends BaseEntity {
     @Property()
     backgroundImgUrl?: string;
 
-    @ManyToMany(() => User, user => user.podcasts)
+    @ManyToMany({ entity: () => User })
     followers = new Collection<User>(this);
 
     @Property()
