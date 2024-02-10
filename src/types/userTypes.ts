@@ -12,11 +12,3 @@ export type UserRegistrationBody = {
 export type UUID = `${string}-${string}-${string}-${string}-${string}`;
 
 export type Role = 'user' | 'admin';
-
-export type Duration = {
-    hours: number;
-    minutes: number;
-    seconds: number;
-};
-
-export type DurationString = `${string}:${string}:${string}`;
