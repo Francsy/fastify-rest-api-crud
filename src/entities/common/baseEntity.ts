@@ -10,7 +10,7 @@ export class BaseEntity {
     @PrimaryKey({ type: 'number', autoincrement: true, unique: true })
     id!: number;
 
-    @Property()
+    @Property({ type: 'date', default: 'NOW()' })
     createdAt = new Date();
 
     @Property({ onUpdate: () => new Date() })

@@ -1,7 +1,7 @@
 import { Entity, ManyToOne, Property } from '@mikro-orm/core';
 import { BaseEntity } from './common/baseEntity';
 import { Podcast } from './Podcast';
-import { Duration } from '../types';
+import { Duration, DurationString } from '../types';
 
 
 @Entity()
@@ -32,12 +32,19 @@ export class Episode extends BaseEntity {
     numPlays!: number;
 
 
-    private parseDuration(durationString: string): Duration {
+    private parseDuration(durationString: DurationString): Duration {
         const [hours, minutes, seconds] = durationString.split(':').map(Number);
         return { hours, minutes, seconds };
     }
 
-    constructor(episodeNum: number, title: string, duration: string | Duration, audioUrl: string, releaseDate: Date, podcast: Podcast, description: string) {
+    constructor(episodeNum: number,
+        title: string,
+        duration: DurationString | Duration,
+        audioUrl: string,
+        releaseDate: Date,
+        podcast: Podcast,
+        description: string) {
+
         super();
         this.episodeNum = episodeNum;
         this.title = title;

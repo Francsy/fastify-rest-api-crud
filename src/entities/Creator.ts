@@ -5,7 +5,7 @@ import { User } from './User';
 @Entity()
 export class Creator extends BaseEntity {
 
-    @OneToOne()
+    @OneToOne({ entity: () => User })
     associatedUser!: User;
 
     @Property({ length: 600 })
