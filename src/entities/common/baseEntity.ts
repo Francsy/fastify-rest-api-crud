@@ -1,11 +1,16 @@
-import { PrimaryKey, Property } from '@mikro-orm/core';
+import { OptionalProps, Entity, PrimaryKey, Property } from '@mikro-orm/core';
 
-export abstract class BaseEntity {
 
-    @PrimaryKey({ type: 'number', autoincrement: true })
+
+@Entity({ abstract: true })
+export class BaseEntity {
+
+    [OptionalProps]?: 'createdAt' | 'updatedAt';
+
+    @PrimaryKey({ type: 'number', autoincrement: true, unique: true })
     id!: number;
 
-    @Property()
+    @Property({ type: 'date', default: 'NOW()' })
     createdAt = new Date();
 
     @Property({ onUpdate: () => new Date() })

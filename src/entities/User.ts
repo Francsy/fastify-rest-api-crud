@@ -1,28 +1,34 @@
-import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
+import { Collection, Entity, ManyToMany, PrimaryKey, Property } from '@mikro-orm/core';
 import { UUID, Role } from '../types';
+import { Podcast } from './Podcast';
+import { createHmac, randomBytes } from 'crypto';
+
 
 @Entity()
 export class User {
 
-    @PrimaryKey({ type: 'uuid' })
+    @PrimaryKey({ type: 'uuid', unique: true, index: true })
     id: UUID = crypto.randomUUID();
+
+    @Property({ unique: true, index: true })
+    email!: string;
 
     @Property({ length: 50, unique: true, index: true })
     username!: string;
 
     @Property({ length: 100 })
-    firstname!: string;
+    firstName!: string;
 
     @Property({ length: 100 })
-    lastname!: string;
+    lastName!: string;
 
-    @Property({ unique: true })
-    email!: string;
-
-    @Property()
+    @Property({ hidden: true, lazy: true })
     password!: string;
 
-    @Property({ length: 5 })
+    @Property({ length: 16, hidden: true, lazy: true })
+    salt!: string;
+
+    @Property({ length: 5, default: 'user' })
     role!: Role;
 
     @Property()
@@ -31,11 +37,59 @@ export class User {
     @Property()
     sessionToken?: string;
 
-    @Property()
+    @ManyToMany(() => Podcast, podcast => podcast.followers, { mappedBy: 'followers' })
+    podcasts = new Collection<Podcast>(this);
+
+    @Property({ type: 'date', default: 'NOW()' })
     createdAt = new Date();
 
+    @Property({ onUpdate: () => new Date() })
+    updatedAt = new Date();
 
-    constructor() {
-        this.role = 'user'; // Default value
+
+
+    constructor(email: string, username: string, firstName: string, lastName: string, password: string, profileImgUrl?: string) {
+        this.email = email,
+            this.username = username,
+            this.firstName = firstName,
+            this.lastName = lastName,
+            this.setPassword(password);
+        this.profileImgUrl = profileImgUrl ?? 'https://example.com/images/avatar.jpg'; // This will change to a public static files url served by the API itself
+    }
+
+    // Note: @BeforeCreate and @BeforeUpdate life cycle hooks for hashing the password will be a nice future implementation:
+
+    private hashPassword(password: string) {
+        const secretKey = process.env.P_KEY || 'your_secret_key';
+        return createHmac('sha256', secretKey).update(password + this.salt).digest('hex');
+    }
+
+    private setPassword(password: string) {
+        this.salt = randomBytes(16).toString();
+        this.password = this.hashPassword(password);
+    }
+
+    public verifyPassword(password: string): boolean {
+        return this.hashPassword(password) === this.password;
+    }
+
+    public changePassword(oldPassword: string, newPassword: string): boolean {
+        try {
+            if (this.verifyPassword(oldPassword)) {
+                this.setPassword(newPassword);
+                return true;
+            } else {
+                throw new Error('Invalid credentials');
+            }
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                console.error(`Error while changing password: ${error.message}`);
+            } else {
+                console.error('Unknown error changing password');
+            }
+            return false;
+        }
     }
 }
+
+
