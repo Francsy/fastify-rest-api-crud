@@ -1,7 +1,11 @@
-import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
+import { OptionalProps, Entity, PrimaryKey, Property } from '@mikro-orm/core';
+
+
 
 @Entity({ abstract: true })
 export class BaseEntity {
+
+    [OptionalProps]?: 'createdAt' | 'updatedAt';
 
     @PrimaryKey({ type: 'number', autoincrement: true, unique: true })
     id!: number;

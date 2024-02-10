@@ -5,10 +5,15 @@ import { User } from './User';
 @Entity()
 export class Creator extends BaseEntity {
 
-    @Property({ type: 'string' })
-    biography = '';
-
     @OneToOne()
     associatedUser!: User;
 
+    @Property({ length: 600 })
+    biography!: string;
+
+    constructor(associatedUser: User, biography: string) {
+        super();
+        this.associatedUser = associatedUser;
+        this.biography = biography;
+    }
 }

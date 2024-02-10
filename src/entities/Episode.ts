@@ -1,4 +1,4 @@
-import { Entity, ManyToOne, Property, BeforeCreate } from '@mikro-orm/core';
+import { Entity, ManyToOne, Property } from '@mikro-orm/core';
 import { BaseEntity } from './common/baseEntity';
 import { Podcast } from './Podcast';
 import { Duration } from '../types';
@@ -31,21 +31,21 @@ export class Episode extends BaseEntity {
     @Property()
     numPlays!: number;
 
-    @BeforeCreate()
-    beforeCreateHook() {
-        if (typeof this.duration === 'string') {
-            this.duration = this.parseDuration(this.duration); // Duration will be transformed from HH:MM:SS string to an object of numbers
-        }
-    }
 
     private parseDuration(durationString: string): Duration {
         const [hours, minutes, seconds] = durationString.split(':').map(Number);
         return { hours, minutes, seconds };
     }
 
-    constructor() {
+    constructor(episodeNum: number, title: string, duration: string | Duration, audioUrl: string, releaseDate: Date, podcast: Podcast, description: string) {
         super();
-        this.description = `Welcome to my podcast ${this.episodeNum} episode: ${this.title}. Ready to have fun?`;
+        this.episodeNum = episodeNum;
+        this.title = title;
+        this.duration = typeof duration === 'string' ? this.parseDuration(duration) : duration;
+        this.audioUrl = audioUrl;
+        this.releaseDate = releaseDate;
+        this.podcast = podcast;
+        this.description = description ?? `Welcome to my podcast ${this.episodeNum} episode: ${this.title}. Ready to have fun?`;
         this.numPlays = 0;
     }
 
