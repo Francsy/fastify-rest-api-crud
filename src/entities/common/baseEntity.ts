@@ -1,8 +1,9 @@
-import { PrimaryKey, Property } from '@mikro-orm/core';
+import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
 
-export abstract class BaseEntity {
+@Entity({ abstract: true })
+export class BaseEntity {
 
-    @PrimaryKey({ type: 'number', autoincrement: true })
+    @PrimaryKey({ type: 'number', autoincrement: true, unique: true })
     id!: number;
 
     @Property()

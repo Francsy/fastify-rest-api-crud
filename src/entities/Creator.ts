@@ -8,7 +8,7 @@ export class Creator extends BaseEntity {
     @Property({ type: 'string' })
     biography = '';
 
-    @OneToOne({ entity: () => User, primary: true })
+    @OneToOne()
     associatedUser!: User;
 
 }

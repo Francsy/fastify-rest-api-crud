@@ -4,7 +4,7 @@ import { UUID, Role } from '../types';
 @Entity()
 export class User {
 
-    @PrimaryKey({ type: 'uuid' })
+    @PrimaryKey({ type: 'uuid', unique: true })
     id: UUID = crypto.randomUUID();
 
     @Property({ length: 50, unique: true, index: true })
@@ -16,7 +16,7 @@ export class User {
     @Property({ length: 100 })
     lastname!: string;
 
-    @Property({ unique: true })
+    @Property({ unique: true, index: true })
     email!: string;
 
     @Property()
