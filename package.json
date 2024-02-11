@@ -7,7 +7,8 @@
     "build": "tsc -p tsconfig.json",
     "start": "node --env-file .env src/server.js",
     "dev": "nodemon --exec ts-node src/server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seeder:create": "npx ts-node ./node_modules/.bin/mikro-orm-esm seeder:create test --config ./src/mikro-orm.config.ts"
   },
   "repository": {
     "type": "git",
@@ -21,13 +22,15 @@
   "homepage": "https://github.com/Francsy/fastify-rest-api-crud#readme",
   "dependencies": {
     "@fastify/cors": "^9.0.1",
-    "@mikro-orm/core": "^6.1.0",
-    "@mikro-orm/migrations": "^6.1.0",
-    "@mikro-orm/postgresql": "^6.1.0",
+    "@mikro-orm/core": "6.1.1",
+    "@mikro-orm/migrations": "6.1.1",
+    "@mikro-orm/postgresql": "6.1.1",
     "dotenv": "^16.4.1",
     "fastify": "^4.26.0"
   },
   "devDependencies": {
+    "@mikro-orm/cli": "6.1.1",
+    "@mikro-orm/seeder": "6.1.1",
     "@types/node": "^20.11.16",
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "@typescript-eslint/parser": "^6.20.0",
