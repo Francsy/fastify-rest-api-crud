@@ -8,7 +8,8 @@
     "start": "node --env-file .env src/server.js",
     "dev": "nodemon --exec ts-node src/server.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seeder:create": "npx ts-node ./node_modules/.bin/mikro-orm-esm seeder:create test --config ./src/mikro-orm.config.ts"
+    "seeder:create": "npx ts-node ./node_modules/.bin/mikro-orm-esm seeder:create test --config ./src/mikro-orm.config.ts",
+    "feed:db": "npx ts-node ./node_modules/.bin/mikro-orm-esm seeder:run --config ./src/mikro-orm.config.ts"
   },
   "repository": {
     "type": "git",

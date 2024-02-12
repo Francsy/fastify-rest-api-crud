@@ -34,8 +34,8 @@ export class User {
     @Property()
     profileImgUrl?: string;
 
-    @Property()
-    sessionToken?: string;
+    @Property({ nullable: true, default: null })
+    sessionToken?: string | null;
 
     @ManyToMany(() => Podcast, podcast => podcast.followers, { mappedBy: 'followers' })
     podcasts = new Collection<Podcast>(this);
@@ -49,11 +49,11 @@ export class User {
 
 
     constructor(email: string, username: string, firstName: string, lastName: string, password: string, profileImgUrl?: string) {
-        this.email = email,
-            this.username = username,
-            this.firstName = firstName,
-            this.lastName = lastName,
-            this.setPassword(password);
+        this.email = email;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.setPassword(password);
         this.profileImgUrl = profileImgUrl ?? 'https://example.com/images/avatar.jpg'; // This will change to a public static files url served by the API itself
     }
 
