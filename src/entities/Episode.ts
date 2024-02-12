@@ -45,7 +45,7 @@ export class Episode extends BaseEntity {
         audioUrl: string,
         releaseDate: Date,
         podcast: Podcast,
-        description: string) {
+        description?: string) {
 
         super();
         this.episodeNum = episodeNum;
