@@ -2,6 +2,7 @@ import { Collection, Entity, ManyToMany, ManyToOne, Property } from '@mikro-orm/
 import { BaseEntity } from './common/baseEntity';
 import { Creator } from './Creator';
 import { User } from './User';
+import { Genre } from '../types';
 
 @Entity()
 export class Podcast extends BaseEntity {
@@ -10,7 +11,7 @@ export class Podcast extends BaseEntity {
     title!: string;
 
     @Property()
-    genre!: string;
+    genre!: Genre;
 
     @ManyToOne()
     podcaster!: Creator;
@@ -18,10 +19,10 @@ export class Podcast extends BaseEntity {
     @Property({ length: 600 })
     description?: string;
 
-    @Property()
+    @Property({ nullable: true })
     logoImgUrl?: string;
 
-    @Property()
+    @Property({ nullable: true })
     backgroundImgUrl?: string;
 
     @ManyToMany({ entity: () => User })
@@ -30,8 +31,7 @@ export class Podcast extends BaseEntity {
     @Property()
     numFollowers!: number;
 
-
-    constructor(title: string, genre: string, podcaster: Creator) {
+    constructor(title: string, genre: Genre, podcaster: Creator) {
         super();
         this.title = title;
         this.genre = genre;

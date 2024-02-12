@@ -1,6 +1,6 @@
 import type { EntityManager } from '@mikro-orm/core';
 import { Seeder } from '@mikro-orm/seeder';
-import { User, Creator, /*  Podcast, Episode */ } from '../entities';
+import { User, Creator, Podcast /*, Episode */ } from '../entities';
 
 
 export class DatabaseSeeder extends Seeder {
@@ -48,6 +48,15 @@ export class DatabaseSeeder extends Seeder {
       await em.persistAndFlush(squanchyCreator);
       squanchy.creator = squanchyCreator;
       await em.flush();
+
+      // Podcasts
+
+      const jerryPodcast = new Podcast('Between Plants', 'Health', jerryCreator);
+      await em.persistAndFlush(jerryPodcast);
+
+      // Episodes
+
+
 
       em.clear();
 
