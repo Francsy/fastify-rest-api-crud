@@ -5,7 +5,7 @@ import { User } from './User';
 @Entity()
 export class Creator extends BaseEntity {
 
-    @OneToOne({ entity: () => User })
+    @OneToOne({ entity: () => User, orphanRemoval: true, deleteRule: 'cascade' })
     associatedUser!: User;
 
     @Property({ length: 600 })

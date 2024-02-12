@@ -1,6 +1,7 @@
-import { Collection, Entity, ManyToMany, PrimaryKey, Property } from '@mikro-orm/core';
+import { Collection, Entity, ManyToMany, PrimaryKey, Property, OneToOne } from '@mikro-orm/core';
 import { UUID, Role } from '../types';
 import { Podcast } from './Podcast';
+import { Creator } from './Creator';
 import { createHmac, randomBytes } from 'crypto';
 
 
@@ -34,11 +35,15 @@ export class User {
     @Property()
     profileImgUrl?: string;
 
-    @Property()
-    sessionToken?: string;
+    @Property({ nullable: true, default: null })
+    sessionToken?: string | null;
+
+    @OneToOne({ entity: () => Creator, orphanRemoval: true, nullable: true, default: null })
+    creator?: Creator | null;
 
     @ManyToMany(() => Podcast, podcast => podcast.followers, { mappedBy: 'followers' })
     podcasts = new Collection<Podcast>(this);
+
 
     @Property({ type: 'date', default: 'NOW()' })
     createdAt = new Date();
@@ -49,11 +54,11 @@ export class User {
 
 
     constructor(email: string, username: string, firstName: string, lastName: string, password: string, profileImgUrl?: string) {
-        this.email = email,
-            this.username = username,
-            this.firstName = firstName,
-            this.lastName = lastName,
-            this.setPassword(password);
+        this.email = email;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.setPassword(password);
         this.profileImgUrl = profileImgUrl ?? 'https://example.com/images/avatar.jpg'; // This will change to a public static files url served by the API itself
     }
 
@@ -61,11 +66,11 @@ export class User {
 
     private hashPassword(password: string) {
         const secretKey = process.env.P_KEY || 'your_secret_key';
-        return createHmac('sha256', secretKey).update(password + this.salt).digest('hex');
+        return createHmac('sha256', secretKey).update(password + this.salt).digest('base64');
     }
 
     private setPassword(password: string) {
-        this.salt = randomBytes(16).toString();
+        this.salt = randomBytes(8).toString('base64');
         this.password = this.hashPassword(password);
     }
 

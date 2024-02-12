@@ -16,6 +16,9 @@ export class Episode extends BaseEntity {
     @Property({ length: 600 })
     description?: string;
 
+    @ManyToOne()
+    podcast!: Podcast;
+
     @Property()
     duration!: Duration;
 
@@ -25,8 +28,6 @@ export class Episode extends BaseEntity {
     @Property({ type: 'date' })
     releaseDate!: Date;
 
-    @ManyToOne()
-    podcast!: Podcast;
 
     @Property()
     numPlays!: number;
@@ -37,13 +38,14 @@ export class Episode extends BaseEntity {
         return { hours, minutes, seconds };
     }
 
-    constructor(episodeNum: number,
+    constructor(
+        episodeNum: number,
         title: string,
         duration: DurationString | Duration,
         audioUrl: string,
         releaseDate: Date,
         podcast: Podcast,
-        description: string) {
+        description?: string) {
 
         super();
         this.episodeNum = episodeNum;

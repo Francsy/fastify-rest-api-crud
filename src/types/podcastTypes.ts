@@ -1,0 +1,1 @@
+export type Genre = 'Comedy' | 'News' | 'Business' | 'Technology' | 'Society' | 'Education' | 'Health' | 'Science' | 'Arts' | 'Music' | 'Sports' | 'TrueCrime' | 'History' | 'Gaming'
