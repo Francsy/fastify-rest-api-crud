@@ -51,13 +51,62 @@ export class DatabaseSeeder extends Seeder {
 
       // Podcasts
 
-      const jerryPodcast = new Podcast('Between Plants', 'Health', jerryCreator);
+      const jerryPodcast = new Podcast('In Jerry´s Shoes Show', 'Society', jerryCreator);
       await em.persistAndFlush(jerryPodcast);
+
+      const meeseeksPodcast = new Podcast('Meeseeks Mindset Mastery', 'Business', meeseeksCreator);
+      await em.persistAndFlush(meeseeksPodcast);
+
+      const unityPodcast = new Podcast('Intergalactic Unity Chronicles', 'History', unityCreator);
+      await em.persistAndFlush(unityPodcast);
+
+      const squanchyPodcast = new Podcast('Cosmic Cat Squanchversations', 'Arts', meeseeksCreator);
+      await em.persistAndFlush(squanchyPodcast);
 
       // Episodes
 
-      const jerryEpisodes = new Episode(1, 'I love plants', '02:30:45', '/audios/01', new Date('2023-01-01'), jerryPodcast);
-      await em.persistAndFlush(jerryEpisodes);
+      const jerryEpisodes = [
+        new Episode(1, 'Between plants', '02:30:45', '/audios/01', new Date('2023-01-01'), jerryPodcast),
+        new Episode(2, 'The Jerry perfect average day', '01:10:35', '/audios/jerry/01', new Date('2023-01-01'), jerryPodcast),
+        new Episode(3, 'The Jerry perfect average day', '01:30:32', '/audios/jerry/02', new Date('2023-01-01'), jerryPodcast),
+        new Episode(4, 'The Jerry perfect average day', '01:06:10', '/audios/jerry/03', new Date('2023-01-01'), jerryPodcast),
+      ];
+
+      for (const episode of jerryEpisodes) {
+        await em.persistAndFlush(episode);
+      }
+
+      const meeseeksEpisodes = [
+        new Episode(1, 'Example', '00:31:59', '/audios/ms/01', new Date('2023-02-11'), jerryPodcast),
+        new Episode(2, 'Example', '00:23:54', '/audios/ms/02', new Date('2023-02-18'), jerryPodcast),
+        new Episode(3, 'Example', '00:45:33', '/audios/ms/03', new Date('2023-02-25'), jerryPodcast),
+      ];
+
+      for (const episode of meeseeksEpisodes) {
+        await em.persistAndFlush(episode);
+      }
+
+      const unityEpisodes = [
+        new Episode(1, 'Example', '00:31:59', '/audios/u/01', new Date('2023-02-11'), jerryPodcast),
+        new Episode(2, 'Example', '00:23:54', '/audios/u/02', new Date('2023-02-18'), jerryPodcast),
+        new Episode(3, 'Example', '00:45:33', '/audios/u/03', new Date('2023-02-25'), jerryPodcast),
+        new Episode(4, 'Example', '00:32:15', '/audios/u/04', new Date('2023-03-04'), jerryPodcast),
+      ];
+
+      for (const episode of unityEpisodes) {
+        await em.persistAndFlush(episode);
+      }
+
+      const squanchyEpisodes = [
+        new Episode(1, 'Example', '00:31:59', '/audios/u/01', new Date('2023-02-11'), jerryPodcast),
+        new Episode(2, 'Example', '00:23:54', '/audios/u/02', new Date('2023-02-18'), jerryPodcast),
+        new Episode(3, 'Example', '00:45:33', '/audios/u/03', new Date('2023-02-25'), jerryPodcast),
+      ];
+
+      for (const episode of squanchyEpisodes) {
+        await em.persistAndFlush(episode);
+      }
+
       em.clear();
 
     });
