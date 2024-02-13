@@ -66,10 +66,11 @@ export class DatabaseSeeder extends Seeder {
       // Episodes
 
       const jerryEpisodes = [
-        new Episode(1, 'Between plants', '02:30:45', '/audios/01', new Date('2023-01-01'), jerryPodcast),
-        new Episode(2, 'The Jerry perfect average day', '01:10:35', '/audios/jerry/01', new Date('2023-01-01'), jerryPodcast),
-        new Episode(3, 'The Jerry perfect average day', '01:30:32', '/audios/jerry/02', new Date('2023-01-01'), jerryPodcast),
+        new Episode(1, 'My life between plants', '02:30:45', '/audios/01', new Date('2023-01-01'), jerryPodcast),
+        new Episode(2, 'Jerry´s Kitchen Chronicles: Tales of Failed Recipes', '01:10:35', '/audios/jerry/01', new Date('2023-01-01'), jerryPodcast),
+        new Episode(3, 'Lost in the Laundry', '01:30:32', '/audios/jerry/02', new Date('2023-01-01'), jerryPodcast),
         new Episode(4, 'The Jerry perfect average day', '01:06:10', '/audios/jerry/03', new Date('2023-01-01'), jerryPodcast),
+        new Episode(4, 'Jerry´s Guide to Awkward Small Talk', '01:06:10', '/audios/jerry/03', new Date('2023-01-01'), jerryPodcast),
       ];
 
       for (const episode of jerryEpisodes) {
@@ -77,9 +78,10 @@ export class DatabaseSeeder extends Seeder {
       }
 
       const meeseeksEpisodes = [
-        new Episode(1, 'Example', '00:31:59', '/audios/ms/01', new Date('2023-02-11'), jerryPodcast),
-        new Episode(2, 'Example', '00:23:54', '/audios/ms/02', new Date('2023-02-18'), jerryPodcast),
-        new Episode(3, 'Example', '00:45:33', '/audios/ms/03', new Date('2023-02-25'), jerryPodcast),
+        new Episode(1, 'Meeseeks Mission: From Existential Pain to Business Gain', '00:31:59', '/audios/ms/01', new Date('2023-02-11'), meeseeksPodcast),
+        new Episode(2, 'Endless Pursuits: Meeseeks Motivation in the Workplace', '00:23:54', '/audios/ms/02', new Date('2023-02-18'), meeseeksPodcast),
+        new Episode(3, 'Existential Entrepreneurship: A Meeseeks Manifesto', '00:45:33', '/audios/ms/03', new Date('2023-02-25'), meeseeksPodcast),
+        new Episode(3, 'From Desperation to Domination: Meeseeks Business Method', '00:45:33', '/audios/ms/03', new Date('2023-02-25'), meeseeksPodcast),
       ];
 
       for (const episode of meeseeksEpisodes) {
@@ -87,10 +89,9 @@ export class DatabaseSeeder extends Seeder {
       }
 
       const unityEpisodes = [
-        new Episode(1, 'Example', '00:31:59', '/audios/u/01', new Date('2023-02-11'), jerryPodcast),
-        new Episode(2, 'Example', '00:23:54', '/audios/u/02', new Date('2023-02-18'), jerryPodcast),
-        new Episode(3, 'Example', '00:45:33', '/audios/u/03', new Date('2023-02-25'), jerryPodcast),
-        new Episode(4, 'Example', '00:32:15', '/audios/u/04', new Date('2023-03-04'), jerryPodcast),
+        new Episode(1, 'Historical Harmonies: Unity´s Perspective on the Past', '00:31:59', '/audios/u/01', new Date('2023-02-11'), unityPodcast),
+        new Episode(2, 'Through Unity´s Eyes: Rewriting History´s Narratives', '00:23:54', '/audios/u/02', new Date('2023-02-18'), unityPodcast),
+        new Episode(3, 'Chronicles Across Centuries: A Single-multiple Exploration', '00:45:33', '/audios/u/03', new Date('2023-02-25'), unityPodcast),
       ];
 
       for (const episode of unityEpisodes) {
@@ -98,9 +99,9 @@ export class DatabaseSeeder extends Seeder {
       }
 
       const squanchyEpisodes = [
-        new Episode(1, 'Example', '00:31:59', '/audios/u/01', new Date('2023-02-11'), jerryPodcast),
-        new Episode(2, 'Example', '00:23:54', '/audios/u/02', new Date('2023-02-18'), jerryPodcast),
-        new Episode(3, 'Example', '00:45:33', '/audios/u/03', new Date('2023-02-25'), jerryPodcast),
+        new Episode(1, 'Squanchy´s Artsy Soirée: A Journey through Creative Chaos', '12:39:00', '/audios/s/01', new Date('2023-03-22'), squanchyPodcast),
+        new Episode(2, 'Squanch & Sketch: Artistic Adventures Unleashed', '15:38:14', '/audios/s/02', new Date('2023-03-28'), squanchyPodcast),
+        new Episode(3, 'Squanchy´s Art Extravaganza: Unleashing Creative Krakens', '13:43:09', '/audios/s/03', new Date('2023-04-04'), squanchyPodcast),
       ];
 
       for (const episode of squanchyEpisodes) {
