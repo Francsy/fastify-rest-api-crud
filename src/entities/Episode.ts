@@ -8,7 +8,7 @@ import { Duration, DurationString } from '../types';
 export class Episode extends BaseEntity {
 
     @Property()
-    episodeNum!: number;
+    episodeRef!: string;
 
     @Property()
     title!: string;
@@ -39,7 +39,7 @@ export class Episode extends BaseEntity {
     }
 
     constructor(
-        episodeNum: number,
+        episodeRef: string,
         title: string,
         duration: DurationString | Duration,
         audioUrl: string,
@@ -48,13 +48,13 @@ export class Episode extends BaseEntity {
         description?: string) {
 
         super();
-        this.episodeNum = episodeNum;
+        this.episodeRef = episodeRef;
         this.title = title;
         this.duration = typeof duration === 'string' ? this.parseDuration(duration) : duration;
         this.audioUrl = audioUrl;
         this.releaseDate = releaseDate;
         this.podcast = podcast;
-        this.description = description ?? `Welcome to my podcast ${this.episodeNum} episode: ${this.title}. Ready to have fun?`;
+        this.description = description ?? `Welcome to my podcast ${this.episodeRef} episode: ${this.title}. Ready to have fun?`;
         this.numPlays = 0;
     }
 
